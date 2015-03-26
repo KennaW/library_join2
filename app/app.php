@@ -60,9 +60,16 @@ $app->delete("/books/{id}", function($id) use ($app) {
 
     $app->post('/search', function() use ($app) {
        $search_word = $_POST['search'];
+       $search_author = $_POST['author_search'];
+
        $returned_books = Book::searchBooks($search_word);
-       return $app['twig']->render('search_title.html.twig', array('books'=>$returned_books));
+       $returned_authors = Author::searchAuthor($search_author);
+
+       return $app['twig']->render('search_title.html.twig', array('books'=>$returned_books, 'authors'=>$returned_authors));
     });
+
+
+
 
 
 

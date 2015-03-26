@@ -22,14 +22,15 @@
 
     <form action='/add_books' method='post'>
         <label for='book_title'>Title</label>
-        <input type='text' name='book_title' id='book_title'>
+        <input type='text' name='book_title' id='book_title' placeholder='Add New Book'>
         <button type='submit'>Add Book</button>
     </form>
 
     <form action='/search' method='post'>
-        <label for='search'>Search Book</label>
-        <input type='text' name='search' id='search'>
-        <button type='submit'>Add Book</button>
+        <label for='search'>Search by book and or author!</label>
+        <input type='text' name='search' id='search' placeholder='Search Book'>
+        <input type='text' name='author_search' id='author_search' placeholder='Search Author'>
+        <button type='submit'>Search</button>
     </form>
 
 

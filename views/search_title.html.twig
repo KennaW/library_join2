@@ -3,17 +3,33 @@
 <title>Results</title>
 </head>
 <body>
-    <h1>Matching Books</h1>
 
     {% if books is not empty %}
-        <p>Here are the books you are looking for:</p>
-        <ul>
-            {% for book in books %}
+        <h1>Matching Books</h1>
 
-                    <li><a href = '/books/{{book.getBookId}}'>{{ book.getTitle }}</a></li>
-                
-            {% endfor %}
-        </ul>
+
+            <p>Here are the books you are looking for:</p>
+            <ul>
+                {% for book in books %}
+
+                        <li><a href = '/books/{{book.getBookId}}'>{{ book.getTitle }}</a></li>
+
+                {% endfor %}
+            </ul>
+    {% endif %}
+
+    {% if authors is not empty %}
+        <h1>Matching Authors</h1>
+
+
+            <p>Here are the authors you are looking for:</p>
+            <ul>
+                {% for author in authors %}
+
+                        <li>{{ author.getName }}</li>
+
+                {% endfor %}
+            </ul>
     {% endif %}
 </body>
 </html>
