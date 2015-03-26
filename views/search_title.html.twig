@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Results</title>
+</head>
+<body>
+    <h1>Matching Books</h1>
+
+    {% if books is not empty %}
+        <p>Here are the books you are looking for:</p>
+        <ul>
+            {% for book in books %}
+
+                    <li><a href = '/books/{{book.getBookId}}'>{{ book.getTitle }}</a></li>
+                
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
