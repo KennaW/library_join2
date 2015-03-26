@@ -88,22 +88,17 @@
             $GLOBALS['DB']->exec("DELETE FROM books_authors WHERE author_id = {$this->getAuthorId()};");
         }
 
-        static function searchAuthor($search)
+        static function searchAuthors($search)
         {
             $output = array();
             $search = strtolower($search);
-            $authors = Author::getAll();
-            foreach($authors as $author)
-            {
-                $name = $author->getName();
-                $name_array = explode(" ",$name);
-                if(in_array($search, $name_array))
-                {
-                    array_push($output, $author);
-                }
+            $authors = $GLOBALS['DB']->query("SELECT * FROM authors WHERE name LIKE '%{$search}%';");
+
+            foreach($authors as $author){
+                $author= new Book($author['name'], $author['id']);
+                array_push($output, $author);
             }
             return $output;
-
         }
 
 

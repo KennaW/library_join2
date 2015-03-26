@@ -35,11 +35,14 @@
             $statement = $GLOBALS['DB']->query("INSERT INTO books (title) VALUES ('{$this->getTitle()}') RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setBookId($result['id']);
+
+
         }
 
         function addAuthor($author)
         {
             $GLOBALS['DB']->exec("INSERT INTO books_authors (book_id, author_id) VALUES ({$this->getBookId()},{$author->getAuthorId()});");
+
         }
 
         function getAuthors()
@@ -94,28 +97,53 @@
             $GLOBALS['DB']->exec("DELETE FROM books_authors WHERE book_id = {$this->getBookId()};");
         }
 
+        function deleteBookAuthor($id)
+        {
+            $GLOBALS['DB']->exec(
+            "DELETE FROM books_authors
+            WHERE book_id = {$this->getBookId()}
+            AND author_id = {$id};");
+        }
+
+        // static function searchBooks($search)
+        // {
+        //     $output = array();
+        //     $search = strtolower($search);
+        //     $search_array = explode(" ",$search);
+        //     $books = Book::getAll();
+        //     foreach($books as $book)
+        //     {
+        //         $title = $book->getTitle();
+        //         $title_array = explode(" ",$title);
+        //         if(in_array($search, $title_array))
+        //         {
+        //             array_push($output, $book);
+        //         }
+        //     }
+        //     return $output;
+        //
+        // }
+
+
         static function searchBooks($search)
         {
             $output = array();
             $search = strtolower($search);
-            $books = Book::getAll();
-            foreach($books as $book)
-            {
-                $title = $book->getTitle();
-                $title_array = explode(" ",$title);
-                if(in_array($search, $title_array))
-                {
-                    array_push($output, $book);
-                }
+            $books = $GLOBALS['DB']->query("SELECT * FROM books WHERE title LIKE '%{$search}%';");
+
+            foreach($books as $book){
+                $book = new Book($book['title'], $book['id']);
+                array_push($output, $book);
             }
             return $output;
-
         }
 
-
-
-
-
+        function addCopies($number){
+            for($i=1;$i<=$number;$i++)
+            {
+                $statement = $GLOBALS['DB']->query("INSERT INTO copies (book_id) VALUES ('{$this->getBookId()}');");
+                }
+        }
 
 
 

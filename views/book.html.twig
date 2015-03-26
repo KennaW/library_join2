@@ -9,9 +9,13 @@
         <p>Here are the authors for this Book:</p>
         <ul>
             {% for author in authors %}
+
+
+
                 <li>
                     <form action="/authors/{{ author.getAuthorId }}" method="post">
                         {{ author.getName }}
+                        <input id="book_id" name="book_id" type="hidden" value="{{ book.getBookId }}">
                       <input name="_method" type="hidden" value="delete" class="float-right">
 
                       <button type="submit">Delete</button>
@@ -30,6 +34,13 @@
     </form>
 
     <p><a href="/books/{{ book.getBookId }}/edit">Edit this Book</a></p>
+
+    <form action="/add_copies" method="post">
+        <input id="book_id" name="book_id" type="hidden" value="{{ book.getBookId() }}">
+      <input name="no_of_copies" type="number" id="no_of_copies" min='1', max = '10'>
+
+      <button type="submit">How many copies are there?</button>
+    </form>
 
     <p><a href='/'>Home</a></p>
 

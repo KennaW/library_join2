@@ -63,14 +63,24 @@ $app->delete("/books/{id}", function($id) use ($app) {
        $search_author = $_POST['author_search'];
 
        $returned_books = Book::searchBooks($search_word);
-       $returned_authors = Author::searchAuthor($search_author);
+       $returned_authors = Author::searchAuthors($search_author);
 
        return $app['twig']->render('search_title.html.twig', array('books'=>$returned_books, 'authors'=>$returned_authors));
     });
 
+    $app->post('/add_copies', function() use ($app) {
+        $no_of_copies = $_POST['no_of_copies'];
+        $book = Book::find($_POST['book_id']);
+        $book->addCopies($no_of_copies);
 
+        return $app['twig']->render('book.html.twig', array('book'=>$book, 'authors'=>$book->getAuthors()));
+    });
 
-
+    $app->delete("/authors/{id}", function($id) use ($app){
+        $book = Book::find($_POST['book_id']);
+      $book->deleteBookAuthor($id);
+      return $app['twig']->render('book.html.twig', array('book'=>$book,'authors'=>$book->getAuthors()));
+    });
 
 
 

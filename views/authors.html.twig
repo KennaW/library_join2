@@ -19,7 +19,7 @@
 
         <h4>Add a Author</h4>
         <form action="/add_author" method="post">
-            <input id="book_id" name="book_id" type="hidden" value="{{ book.getId() }}">
+            <input id="book_id" name="book_id" type="hidden" value="{{ book.getBookId() }}">
                 <label for='author_name'>Author Name</label>
                 <input id='author_name' name='author_name' type='text'>
 
