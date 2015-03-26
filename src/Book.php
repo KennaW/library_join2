@@ -145,6 +145,12 @@
                 }
         }
 
+        function totalCopies()
+        {
+             $copies = $GLOBALS['DB']->query("SELECT COUNT(book_id) FROM copies WHERE book_id = {$this->getBookId()}");
+             return $copies;
+        }
+
 
 
 

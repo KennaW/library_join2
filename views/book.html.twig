@@ -1,9 +1,10 @@
 <html>
 <head>
-<title>Authors for {{ book.getTitle() }}</title>
+<title>Authors for {{ book.getTitle }}</title>
 </head>
 <body>
     <h1>{{ book.getTitle() }}</h1>
+    <h2>Copies Available: {{ book.totalCopies }} </h2>
 
     {% if authors is not empty %}
         <p>Here are the authors for this Book:</p>
@@ -39,10 +40,11 @@
         <input id="book_id" name="book_id" type="hidden" value="{{ book.getBookId() }}">
       <input name="no_of_copies" type="number" id="no_of_copies" min='1', max = '10'>
 
-      <button type="submit">How many copies are there?</button>
+      <button type="submit">Please add the number of copies of the book</button>
     </form>
 
     <p><a href='/'>Home</a></p>
+
 
 </body>
 </html>
